@@ -11,3 +11,14 @@ AOC2023_Day01_Fortran/program.exe
 .gitignore
 .vs/ProjectSettings.json
 AOC2023_Day23_Rust/program.pdb
+/AOC2023_Day02_C++/Day2/.vs/Day2
+/AOC2023_Day02_C++/Day2/ConsoleApplication1/x64/Debug
+/AOC2023_Day02_C++/Day2/ConsoleApplication1/ConsoleApplication1.vcxproj
+/AOC2023_Day02_C++/Day2/ConsoleApplication1/ConsoleApplication1.vcxproj.filters
+/AOC2023_Day02_C++/Day2/ConsoleApplication1/ConsoleApplication1.vcxproj.user
+/AOC2023_Day02_C++/.vscode
+/AOC2023_Day02_C++/Day2/ConsoleApplication2/x64/Debug
+/AOC2023_Day02_C++/Day2/ConsoleApplication2/ConsoleApplication2.vcxproj
+/AOC2023_Day02_C++/Day2/ConsoleApplication2/ConsoleApplication2.vcxproj.filters
+/AOC2023_Day02_C++/Day2/ConsoleApplication2/ConsoleApplication2.vcxproj.user
+/AOC2023_Day02_C++/Day2/x64/Debug

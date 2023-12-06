@@ -32,3 +32,6 @@ __azurite_db_blob_extent__.json
 Day02_COBOL/default.conf
 Day02_COBOL/example.txt
 Day02_COBOL/program.cbl
+/Day05_C/index.PY
+/Day05_C/.vs/main/v17
+/.vscode/settings.json

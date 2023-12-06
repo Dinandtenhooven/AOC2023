@@ -38,15 +38,15 @@ void lineToNumArr(char line[256], int64_t * arr, int64_t startIndex, int pr) {
 
         int64_t x = ch - '0';
         num = num * ((int64_t) 10) + x;
-        if(pr == 1) {
-            // Use the correct format specifier for int64_t
-            printf("%ld %c %ld\n", x, ch, num);
-        }
+        // if(pr == 1) {
+        //     // Use the correct format specifier for int64_t
+        //     printf("%ld %c %ld\n", x, ch, num);
+        // }
     }
 }
 
 void parseSeeds(char line[256]) {
-    printf("--seed");
+    // printf("--seed");
     lineToNumArr(line, seeds, 7, 1);
 }
 
@@ -72,7 +72,7 @@ void parseMappings(char line[256], FILE *file) {
         if (i == 0)
         {
             parseSeeds(line);
-            printf("%s\n", line);
+            // printf("%s\n", line);
             skip = 2;
             i++;
             continue;
@@ -108,7 +108,7 @@ int64_t main() {
     FILE *file;
     char line[MAX_LINE_LENGTH];
 
-    file = fopen("example.txt", "r");
+    file = fopen("input.txt", "r");
 
     if (file == NULL) {
         perror("Error opening file");
@@ -117,11 +117,11 @@ int64_t main() {
 
     parseMappings(line, file);
 
-    printf("Print64_t seeds\n");
-    for(int64_t i = 0; i < 20; i++) {
-        if(seeds[i] == 0) break;
-        printf("%d\n", seeds[i]);
-    }
+    // printf("Print64_t seeds\n");
+    // for(int64_t i = 0; i < 20; i++) {
+    //     if(seeds[i] == 0) break;
+    //     printf("%d\n", seeds[i]);
+    // }
     
     // printf("Print64_t last mapping\n");
     // for(int64_t m = 0; m < 7; m++) {
@@ -132,40 +132,41 @@ int64_t main() {
     // }
     int64_t minimum = INT_MAX;
     int64_t value = 0;
+    int64_t from = 0;
+    int64_t to = 0;
 
-    for(int64_t i = 0; i < 20; i++) {
+    for(int64_t i = 0; i < 20; i+=2) {
         if(seeds[i] == 0) break;
+        from = seeds[i];
+        to = (from + seeds[i + 1]);
         value = seeds[i];
-        // printf("Seed %d :: \n", value);
+        printf("%ld to %ld", from, to);
 
-        for(int64_t j = 0; j < 7; j++) {
-            struct Range *map = mapping[j];
-            
-            // printf("%d - ", value);
-            for(int64_t k = 0; k < 50;k++) {
-
-                struct Range range = map[k];
-                if((range.a + range.b + range.c) == 0) break;
+        for(int64_t m = from; m < to; m++) {
+            for(int64_t j = 0; j < 7; j++) {
+                struct Range *map = mapping[j];
                 
-                int64_t lower = range.b;
-                int64_t high = range.b + range.c;
+                for(int64_t k = 0; k < 50;k++) {
 
-                // printf("%d %d %d :: ", range.a, range.b, range.c);
-                if(value >= lower && value < high) {
-                    value = value + range.a - range.b;
-                    // printf("%d\n", value);
-                    break;
+                    struct Range range = map[k];
+                    if((range.a + range.b + range.c) == 0) break;
+                    
+                    int64_t lower = range.b;
+                    int64_t high = range.b + range.c;
+
+                    if(value >= lower && value < high) {
+                        value = value + range.a - range.b;
+                        break;
+                    }
                 }
-                
-                // printf("%d\n", value);
+            }
+            
+            if(value < minimum) {
+                minimum = value;
             }
         }
-
-        printf("Seed %d: %d\n", i, value);
-        if(value < minimum) {
-            minimum = value;
-        }
-        printf("Minimum: %d", minimum);
+        
+        printf("Minimum: %d\n", minimum);
     }
 
     printf("Minimum: %d\n", minimum);

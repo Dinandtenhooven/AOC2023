@@ -136,13 +136,13 @@ int64_t main() {
     int64_t to = 0;
 
     for(int64_t i = 0; i < 20; i+=2) {
-        if(seeds[i] == 0) break;
+        // value = seeds[i];
         from = seeds[i];
-        to = (from + seeds[i + 1]);
-        value = seeds[i];
-        printf("%ld to %ld", from, to);
+        to = seeds[i] + seeds[i + 1];
 
         for(int64_t m = from; m < to; m++) {
+            value = m; // <= right
+            // printf("seed %ld - ", m);
             for(int64_t j = 0; j < 7; j++) {
                 struct Range *map = mapping[j];
                 
@@ -156,10 +156,12 @@ int64_t main() {
 
                     if(value >= lower && value < high) {
                         value = value + range.a - range.b;
+                        // printf("value: %ld\n", value);
                         break;
                     }
                 }
             }
+
             
             if(value < minimum) {
                 minimum = value;

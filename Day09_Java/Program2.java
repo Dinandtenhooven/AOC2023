@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.ArrayList;
 
-public class Program {
+public class Program2 {
 
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Oasis> todayIsGonnaBeTheDay = ReadFile();
@@ -27,7 +27,7 @@ public class Program {
 
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
-            Oasis oasis = new Oasis(data);
+            Oasis oasis = Oasis.fromReverse(data);
 
             Wonderwall.add(oasis);
         }

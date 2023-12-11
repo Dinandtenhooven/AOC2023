@@ -7,6 +7,8 @@ end
 def withSas(startChar)
     h = {}
     arr = []
+    dots = {}
+
     line_num = 0
     File.open('example.txt').each do |line|
         char_num = 0
@@ -21,7 +23,15 @@ def withSas(startChar)
                 }
                 h[getKey(char_num, line_num)] = position
                 arr << position
-            elsif ch != '.' && ch != "\n"
+            elsif ch != '.'
+                position = { 
+                    'x' => char_num, 
+                    'y' => line_num,
+                    'char' => startChar,
+                    'count' => 0 
+                }
+                dots[getKey(char_num, line_num)] = position
+            elsif ch != "\n"
                 position = { 
                     'x' => char_num, 
                     'y' => line_num,
@@ -52,7 +62,9 @@ def withSas(startChar)
         count = elem['count']
         ch = elem['char']
 
-        dirs = [];
+        dirs = []
+        neighborDots = []
+
         case ch
         when 'S'
             dirs = [
@@ -101,6 +113,17 @@ def withSas(startChar)
                 end
             end
         end
+
+        dirs.each do |dir| 
+            nx = x - dir['x']
+            ny = y - dir['y']
+            key = getKey(nx, ny)
+            # puts key
+
+            if dots.key?(key)
+
+            end
+        end
         
     end
 
@@ -118,22 +141,8 @@ def withSas(startChar)
 end
 
 minimums = [
-    withSas('F'),
-    withSas('J'),
-    withSas('|'),
-    withSas('-'),
-    withSas('7'),
-    withSas('L')
+    withSas('J')
 ]
-
-
-minValue = 100000000
-minimums.each do |elem|
-    if elem < minValue && elem != 0
-        minValue = elem
-    end
-end
-
 
 puts "-------------"
 puts minValue    
